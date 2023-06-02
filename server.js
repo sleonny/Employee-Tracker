@@ -1,8 +1,9 @@
-var mysql = require("mysql");
-var inquirer = require("inquirer");
-var fs = require('fs');
+const mysql = require("mysql");
+const inquirer = require("inquirer");
+const fs = require('fs');
+const { constants } = require("buffer");
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
@@ -87,3 +88,25 @@ const selectEmployees = () => {
         }
     );
 };
+
+const addDepartment = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the new department name?',
+            validate: departmentName => {
+                if (departmentName) {
+                    return true;
+                } else {
+                    console.log('Please enter a name for the new department');
+                    return false;
+                }
+            }
+        }
+    ])
+    .then(name => {
+        connection.promise().query('INSERT INTO department SET ?', name);
+        //function;
+    })
+}
