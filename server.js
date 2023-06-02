@@ -110,3 +110,63 @@ const addDepartment = () => {
         //function;
     })
 }
+
+const addRole = () => {
+   return connection.promise().query(
+    'SELECT department.id', 'department.name FROM department;'
+   ) .then (([department]) => {
+    let departmentChoice = department.map(({
+        id, name
+    }) => 
+    ({
+        name: name,
+        value: id
+    }));
+    inquirer.prompt(
+        [{
+            type: 'input',
+            name: 'newRole',
+            message: 'Please enter the title of the new role',
+            validate: roleName => {
+                if (roleName) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'list',
+            name: 'department',
+            message: 'In what department would you like to place the new role?',
+            choices: departmentChoice
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'Please enter the salary for the new role',
+            validate: salary => {
+                if (salary) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+    ]
+)
+    .then (({ newRole, department, salary}) => {
+        const query = connection.query(
+            'INSERT INTO role SET ?',
+            {
+                title: newRole,
+                department_id: department,
+                salary: salary
+            },
+            function (err, res) {
+                if (err) throw err;
+            }
+        )
+    }).then(() => //function())
+   })
+}
