@@ -31,29 +31,59 @@ const mainMenu = () => {
     .then(userChoice => {
         switch (userChoice.mainMenu) {
             case 'View all departments':
-                function();
+                // function();
                 break;
             case 'View all roles':
-                function();
+                // function();
                 break;
             case 'View all employees':
-                function();
+                // function();
                 break;
             case 'Add a department':
-                function();
+                // function();
                 break;
             case 'Add a role':
-                function();
+                // function();
                 break;
             case 'Add an employee':
-                function();
+                // function();
                 break;
             case 'Update an employee role':
-                function();
+                // function();
                 break;
             default:
                 process.exit();
                 
         }
     });
+};
+
+const selectDepartment = () => {
+    connection.query(
+    'SELECT * FROM DEPARTMENT;'
+    (error, results) => {
+        console.table(results);
+        // function();
+        }
+    );
+};
+
+const selectRole = () => {
+    connection.query(
+    'SELECT * FROM ROLE;'
+    (error, results) => {
+        console.table(results);
+        // function();
+        }
+    );
+};
+
+const selectEmployees = () => {
+    connection.query(
+        'SELECT * FROM EMPLOYEES;'
+        (error, results) => {
+        console.table(results);
+        // function();
+        }
+    );
 };
