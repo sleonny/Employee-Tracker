@@ -169,4 +169,55 @@ const addRole = () => {
         )
     }).then(() => //function())
    })
-}
+};
+
+const addEmployee = (role) => {
+    return connection.promise().query(
+        'SELECT Role.id, role.title FROM Role;'
+    )
+    .then (([employee]) => {
+        var titleChoice = employee.map(({
+            id, title
+        }) => ({
+            value: id, 
+            name: title
+        }))
+    connection.promise().query(
+        'SELECT Employee.id, CONCAT(Employee.first_name,``,Employee.last_name) AS manager FROM Employee;'
+    ).then(([manager]) => {
+        let managerChoice = manager.map(({
+            id, 
+            manager
+        }) => ({
+            value:id, 
+            name: manager
+        }));
+        inquirer.prompt(
+            [{
+                type: 'input',
+                name: 'firstName',
+                message: 'What is the employees first name?',
+                validate firstName => {
+                    if (firstName) {
+                        return true;
+                    } else {
+                        console.log('Please enter the first name of the employee')
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'lastName',
+                message: 'What is the the employees last name?',
+                validate: lastName => {
+                    return true;
+                } else {
+                    console.log('Please enter the last name of the employee')
+                    return false;
+                }
+            }
+        }]
+        )
+    })
+    }
