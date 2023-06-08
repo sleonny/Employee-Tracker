@@ -1,7 +1,7 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const fs = require("fs");
-const { constants } = require("buffer");
+require("console.table");
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -39,25 +39,25 @@ const mainMenu = () => {
     .then((userChoice) => {
       switch (userChoice.mainMenu) {
         case "View all departments":
-          // function();
+          selectDepartment;
           break;
         case "View all roles":
-          // function();
+          selectRole;
           break;
         case "View all employees":
-          // function();
+          selectEmployee;
           break;
         case "Add a department":
-          // function();
+          addDepartment;
           break;
         case "Add a role":
-          // function();
+          addRole;
           break;
         case "Add an employee":
-          // function();
+          addEmployee;
           break;
         case "Update an employee role":
-          // function();
+          updateRole;
           break;
         default:
           process.exit();
@@ -68,7 +68,7 @@ const mainMenu = () => {
 const selectDepartment = () => {
   connection.query("SELECT * FROM DEPARTMENT;", (error, results) => {
     console.table(results);
-    // function();
+    mainMenu();
   });
 };
 
@@ -79,7 +79,7 @@ const selectRole = () => {
   });
 };
 
-const selectEmployees = () => {
+const selectEmployee = () => {
   connection.query("SELECT * FROM EMPLOYEES;", (error, results) => {
     console.table(results);
     // function();
