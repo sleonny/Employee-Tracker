@@ -75,14 +75,14 @@ const selectDepartment = () => {
 const selectRole = () => {
   connection.query("SELECT * FROM ROLE;", (error, results) => {
     console.table(results);
-    // function();
+    mainMenu();
   });
 };
 
 const selectEmployee = () => {
   connection.query("SELECT * FROM EMPLOYEES;", (error, results) => {
     console.table(results);
-    // function();
+    mainMenu;
   });
 };
 
@@ -105,7 +105,7 @@ const addDepartment = () => {
     ])
     .then((name) => {
       connection.promise().query("INSERT INTO department SET ?", name);
-      //function;
+      selectDepartment;
     });
 };
 
@@ -165,7 +165,7 @@ const addRole = () => {
           );
         })
         .then(() => {
-          //function();
+          selectRole;
         });
     });
 };
@@ -245,7 +245,7 @@ const addEmployee = () => {
                 }
               );
             })
-            .then(() => selectEmployees());
+            .then(() => selectEmployee());
         });
     });
 };
