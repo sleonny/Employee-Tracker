@@ -81,7 +81,7 @@ const selectRole = () => {
 const selectEmployee = () => {
   connection.query("SELECT * FROM EMPLOYEES;", (error, results) => {
     console.table(results);
-    mainMenu;
+    mainMenu();
   });
 };
 
