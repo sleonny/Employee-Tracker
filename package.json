@@ -18,8 +18,7 @@
   },
   "homepage": "https://github.com/sleonny/employee-tracker#readme",
   "dependencies": {
-    "fs": "^0.0.1-security",
-    "inquirer": "^9.2.7",
+   "inquirer": "^9.2.7",
    "mysql2": "^3.3.3"
   }
 }
