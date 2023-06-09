@@ -38,25 +38,25 @@ const mainMenu = () => {
     .then((userChoice) => {
       switch (userChoice.mainMenu) {
         case "View all departments":
-          selectDepartment;
+          selectDepartment();
           break;
         case "View all roles":
-          selectRole;
+          selectRole();
           break;
         case "View all employees":
-          selectEmployee;
+          selectEmployee();
           break;
         case "Add a department":
-          addDepartment;
+          addDepartment();
           break;
         case "Add a role":
-          addRole;
+          addRole();
           break;
         case "Add an employee":
-          addEmployee;
+          addEmployee();
           break;
         case "Update an employee role":
-          updateRole;
+          updateRole();
           break;
         default:
           process.exit();
@@ -104,7 +104,7 @@ const addDepartment = () => {
     ])
     .then((name) => {
       connection.promise().query("INSERT INTO department SET ?", name);
-      selectDepartment;
+      selectDepartment();
     });
 };
 
@@ -164,7 +164,7 @@ const addRole = () => {
           );
         })
         .then(() => {
-          selectRole;
+          selectRole();
         });
     });
 };
