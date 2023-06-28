@@ -1,5 +1,6 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
+const fs = require("fs");
 require("console.table");
 
 const connection = mysql.createConnection({
@@ -79,7 +80,7 @@ const selectRole = () => {
 };
 
 const selectEmployee = () => {
-  connection.query("SELECT * FROM EMPLOYEES;", (error, results) => {
+  connection.query("SELECT * FROM EMPLOYEE;", (error, results) => {
     console.table(results);
     mainMenu();
   });
@@ -103,8 +104,14 @@ const addDepartment = () => {
       },
     ])
     .then((name) => {
-      connection.promise().query("INSERT INTO department SET ?", name);
-      selectDepartment();
+      connection.query(
+        "INSERT INTO department SET ?",
+        name,
+        (error, result) => {
+          if (error) throw error;
+          selectDepartment();
+        }
+      );
     });
 };
 
@@ -181,7 +188,7 @@ const addEmployee = () => {
       connection
         .promise()
         .query(
-          "SELECT Employee.id, CONCAT(Employee.first_name, Employee.last_name) AS manager FROM Employee;"
+          "SELECT Employee.id, CONCAT(Employee.first_name, ' ', Employee.last_name) AS manager FROM Employee;"
         )
         .then(([manager]) => {
           let managerChoice = manager.map(({ id, manager }) => ({
@@ -240,7 +247,7 @@ const addEmployee = () => {
                 },
                 function (err, res) {
                   if (err) throw err;
-                  console.log({ role, manager });
+                  console.log(res);
                 }
               );
             })
@@ -300,4 +307,3 @@ const updateRole = () => {
         });
     });
 };
-mainMenu();
