@@ -91,7 +91,7 @@ const addDepartment = () => {
     .prompt([
       {
         type: "input",
-        name: "name",
+        department_name: "name",
         message: "What is the new department name?",
         validate: (departmentName) => {
           if (departmentName) {
@@ -103,10 +103,10 @@ const addDepartment = () => {
         },
       },
     ])
-    .then((name) => {
+    .then((department_name) => {
       connection.query(
         "INSERT INTO department SET ?",
-        name,
+        department_name,
         (error, result) => {
           if (error) throw error;
           selectDepartment();
@@ -162,7 +162,7 @@ const addRole = () => {
             "INSERT INTO role SET ?",
             {
               title: newRole,
-              department_id: department,
+              dept_id: department,
               salary: salary,
             },
             function (err, res) {
