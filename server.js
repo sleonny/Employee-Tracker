@@ -21,8 +21,8 @@ const mainMenu = () => {
   return inquirer
     .prompt([
       {
-        name: "mainMenu",
         type: "list",
+        name: "mainMenu",
         message: "Where would you like to start?",
         choices: [
           "View all departments",
@@ -91,7 +91,7 @@ const addDepartment = () => {
     .prompt([
       {
         type: "input",
-        department_name: "name",
+        name: "name",
         message: "What is the new department name?",
         validate: (departmentName) => {
           if (departmentName) {
@@ -103,10 +103,10 @@ const addDepartment = () => {
         },
       },
     ])
-    .then((department_name) => {
+    .then((departmentName) => {
       connection.query(
         "INSERT INTO department SET ?",
-        department_name,
+        departmentName,
         (error, result) => {
           if (error) throw error;
           selectDepartment();
