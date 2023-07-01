@@ -1,14 +1,13 @@
 # Employee Tracker
 
-    ![badge](https://img.shields.io/badge/license-MIT License-brightgreen)
+## Description
 
-    ## Description
-
-    This app was created to build a content management system in order to track employees.  It provides an easy command line interface that allows for viewing, adding and updating employees by department and role.
+This app was created to build a content management system in order to track employees.  It provides an easy command line interface that allows for viewing, adding and updating employees by department and role.
 
 ## Table of Contents
 
 - [Description](#description)
+- [Demonstration](#demonstration)
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
@@ -16,32 +15,34 @@
 - [Tests](#tests)
 - [Questions](#questions)
 
-  ## Installation
+## Demonstration
+
+https://drive.google.com/file/d/129TuBBHhXkZ857n0FR2mql29nvjmeprF/view
+
+## Installation
 
   To install this first start the mysql server by logging in. Then seed the database and enter "node server.js" in the command line.
 
-  ## Usage
+## Usage
 
   This app is to be used for easily tracking employees, departments, roles and salaries in an easy to read command line interface.
 
-  ## License
-
-  ## License
+## License
 
   ![badge](https://img.shields.io/badge/license-MIT License-brightgreen)
   This application is covered by the MIT License license.
 
-  ## Credits
+## Credits
 
   mysql, inquirer, console.table, ChatGPT, w3 schools and stack overflow with help completing this project.
 
-  ## Tests
+## Tests
 
-  ## How to Contribute
+## How to Contribute
 
   To contribute to this project please fork the repository and submit a pull request. Thank you!
 
-  ## Questions?
+## Questions?
 
   Come see me on GitHub @ [sleonny](https://github.com/sleonny);
   Or
