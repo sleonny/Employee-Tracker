@@ -68,6 +68,7 @@ const mainMenu = () => {
 const selectDepartment = () => {
   connection.query("SELECT * FROM DEPARTMENT;", (error, results) => {
     console.table(results);
+    console.log(error);
     mainMenu();
   });
 };

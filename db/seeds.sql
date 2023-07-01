@@ -17,8 +17,8 @@ INSERT INTO role (title, salary, dept_id) VALUES
     ('Goalies', 45000, 4);
 
 -- Seed data for employees table
-INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES
-    ('Carlo', 'Ancelloti', 1, 0),
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES
+    ('Carlo', 'Ancelloti', 1, NULL),
     ('Karim', 'Benzema', 2, 1),
     ('Vinicius', 'Junior', 3, 1),
     ('Tony', 'Kroos', 4, 2),
