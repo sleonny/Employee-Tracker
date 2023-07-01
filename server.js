@@ -92,10 +92,10 @@ const addDepartment = () => {
     .prompt([
       {
         type: "input",
-        name: "name",
+        name: "department_name",
         message: "What is the new department name?",
-        validate: (departmentName) => {
-          if (departmentName) {
+        validate: (departmentNameInput) => {
+          if (departmentNameInput) {
             return true;
           } else {
             console.log("Please enter a name for the new department");
@@ -104,12 +104,15 @@ const addDepartment = () => {
         },
       },
     ])
-    .then((departmentName) => {
+    .then(({ department_name }) => {
       connection.query(
         "INSERT INTO department SET ?",
-        departmentName,
+        { department_name: department_name },
         (error, result) => {
-          if (error) throw error;
+          if (error) {
+            console.error("There was an error in addDepartment: ", error);
+            throw error;
+          }
           selectDepartment();
         }
       );
@@ -119,10 +122,10 @@ const addDepartment = () => {
 const addRole = () => {
   return connection
     .promise()
-    .query("SELECT department.id, department.name FROM department;")
+    .query("SELECT department.id, department.department_name FROM department;")
     .then(([department]) => {
-      let departmentChoice = department.map(({ id, name }) => ({
-        name: name,
+      let departmentChoice = department.map(({ id, department_name }) => ({
+        name: department_name,
         value: id,
       }));
       inquirer
@@ -159,7 +162,7 @@ const addRole = () => {
           },
         ])
         .then(({ newRole, department, salary }) => {
-          const query = connection.query(
+          connection.query(
             "INSERT INTO role SET ?",
             {
               title: newRole,
@@ -167,7 +170,10 @@ const addRole = () => {
               salary: salary,
             },
             function (err, res) {
-              if (err) throw err;
+              if (err) {
+                console.error("There was an error in addRole: ", err);
+                throw err;
+              }
             }
           );
         })
@@ -238,7 +244,7 @@ const addEmployee = () => {
               },
             ])
             .then(({ firstName, lastName, role, manager }) => {
-              const query = connection.query(
+              connection.query(
                 "INSERT INTO Employee SET ?",
                 {
                   first_name: firstName,
@@ -247,7 +253,10 @@ const addEmployee = () => {
                   manager_id: manager,
                 },
                 function (err, res) {
-                  if (err) throw err;
+                  if (err) {
+                    console.error("There was an error in addEmployee: ", err);
+                    throw err;
+                  }
                   console.log(res);
                 }
               );
@@ -260,11 +269,9 @@ const addEmployee = () => {
 const updateRole = () => {
   return connection
     .promise()
-    .query(
-      "SELECT Role.id, Role.title, Role.salary, Role.department_id FROM Role;"
-    )
+    .query("SELECT Role.id, Role.title, Role.salary, Role.dept_id FROM Role;")
     .then(([role]) => {
-      let roleChoices = roles.map(({ id, title }) => ({
+      let roleChoices = role.map(({ id, title }) => ({
         value: id,
         name: title,
       }));
@@ -276,35 +283,45 @@ const updateRole = () => {
             message: "Please select the role you would like to update",
             choices: roleChoices,
           },
+          {
+            type: "input",
+            name: "title",
+            message: "Enter the new name of the title",
+            validate: (titleName) => {
+              if (titleName) {
+                return true;
+              } else {
+                console.log("You must enter a title");
+                return false;
+              }
+            },
+          },
+          {
+            type: "input",
+            name: "salary",
+            message: "Enter the new salary",
+            validate: (salary) => {
+              if (salary) {
+                return true;
+              } else {
+                console.log("You must enter a salary");
+                return false;
+              }
+            },
+          },
         ])
-        .then((role) => {
-          console.log(role);
-          inquirer
-            .prompt([
-              {
-                type: "input",
-                name: "title",
-                message: "Enter the name of the title",
-                validate: (titleName) => {
-                  if (titleName) {
-                    return true;
-                  } else {
-                    console.log("You must enter a title");
-                    return false;
-                  }
-                },
-              },
-            ])
-            .then(({ title, salary }) => {
-              const query = connection.query(
-                "UPDATE role SET title = ?, salary = ? WHERE id = ?",
-                [title, salary, role.roles],
-                function (err, res) {
-                  if (err) throw err;
-                }
-              );
-            })
-            .then(() => mainMenu());
-        });
+        .then(({ role, title, salary }) => {
+          connection.query(
+            "UPDATE role SET title = ?, salary = ? WHERE id = ?",
+            [title, salary, role],
+            function (err, res) {
+              if (err) {
+                console.error("There was an error in updateRole: ", err);
+                throw err;
+              }
+            }
+          );
+        })
+        .then(() => mainMenu());
     });
 };

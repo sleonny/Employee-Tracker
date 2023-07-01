@@ -1,32 +1,48 @@
-# Employee-Tracker
-A MySQL application to be able to view and manage the departments, roles, and employees in my company.
+# Employee Tracker
 
-## Acceptance Criteria
+    ![badge](https://img.shields.io/badge/license-MIT License-brightgreen)
 
-GIVEN a command-line application that accepts user input
-WHEN I start the application
-THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
-WHEN I choose to view all departments
-THEN I am presented with a formatted table showing department names and department ids
-WHEN I choose to view all roles
-THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
-WHEN I choose to view all employees
-THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
-WHEN I choose to add a department
-THEN I am prompted to enter the name of the department and that department is added to the database
-WHEN I choose to add a role
-THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
-WHEN I choose to add an employee
-THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-WHEN I choose to update an employee role
-THEN I am prompted to select an employee to update and their new role and this information is updated in the database
+    ## Description
 
-## Technical Acceptance
+    This app was created to build a content management system in order to track employees.  It provides an easy command line interface that allows for viewing, adding and updating employees by department and role.
 
-Satisfies all of the preceding acceptance criteria plus the following:
+## Table of Contents
 
-Uses the Inquirer packageLinks to an external site..
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
 
-Uses the MySQL2 packageLinks to an external site. to connect to a MySQL database.
+  ## Installation
 
-Follows the table schema outlined in the homework instructions.
+  To install this first start the mysql server by logging in. Then seed the database and enter "node server.js" in the command line.
+
+  ## Usage
+
+  This app is to be used for easily tracking employees, departments, roles and salaries in an easy to read command line interface.
+
+  ## License
+
+  ## License
+
+  ![badge](https://img.shields.io/badge/license-MIT License-brightgreen)
+  This application is covered by the MIT License license.
+
+  ## Credits
+
+  mysql, inquirer, console.table, ChatGPT, w3 schools and stack overflow with help completing this project.
+
+  ## Tests
+
+  ## How to Contribute
+
+  To contribute to this project please fork the repository and submit a pull request. Thank you!
+
+  ## Questions?
+
+  Come see me on GitHub @ [sleonny](https://github.com/sleonny);
+  Or
+  Email me @ leonardmsean@gmail.com
